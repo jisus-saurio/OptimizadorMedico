@@ -287,19 +287,30 @@ class InterfazAvanzadaSalud:
         btn_simular.pack(pady=5)
     
     def crear_area_graficas(self, parent):
-        """Área para gráficas dinámicas"""
+        """Área para gráficas dinámicas con menú de pestañas"""
         area = ttk.Frame(parent, style='Tarjeta.TFrame', padding=20)
         area.pack(fill='both', expand=True, padx=20, pady=10)
-        
+
         ttk.Label(area, text="Análisis Gráfico Interactivo", style='Titulo.TLabel').pack(anchor='w', pady=(0, 15))
-        
-        # Frame para las gráficas
-        self.frame_graficas = tk.Frame(area, bg='white')
-        self.frame_graficas.pack(fill='both', expand=True)
-        
-        # Inicializar gráficas
+
+        # Menú de pestañas para las gráficas
+        self.tabs_graficas = ttk.Notebook(area)
+        self.tabs_graficas.pack(fill='both', expand=True)
+
+        # Crear un frame para cada gráfica
+        self.tab_demanda = tk.Frame(self.tabs_graficas, bg='white')
+        self.tab_tiempo = tk.Frame(self.tabs_graficas, bg='white')
+        self.tab_tipo = tk.Frame(self.tabs_graficas, bg='white')
+        self.tab_especialidad = tk.Frame(self.tabs_graficas, bg='white')
+
+        self.tabs_graficas.add(self.tab_demanda, text="Demanda por Hora")
+        self.tabs_graficas.add(self.tab_tiempo, text="Tiempo vs Médicos")
+        self.tabs_graficas.add(self.tab_tipo, text="Distribución por Tipo")
+        self.tabs_graficas.add(self.tab_especialidad, text="Déficit por Especialidad")
+
+        # Inicializar cada gráfica
         self.actualizar_graficas()
-    
+
     def actualizar_automatico(self, event=None):
         """Actualización automática cuando cambian controles"""
         # Pequeño delay para evitar actualizaciones excesivas
@@ -389,6 +400,18 @@ class InterfazAvanzadaSalud:
                         textcoords='offset points', fontsize=14, weight='bold',
                         bbox=dict(boxstyle="round,pad=0.7", facecolor="lightgreen", alpha=0.9),
                         arrowprops=dict(arrowstyle='->', color='green', lw=3))
+            
+            # Línea horizontal de tiempo mínimo teórico
+            if demanda_actual > 0:
+                tiempo_minimo = demanda_actual / medicos
+                ax2.axhline(y=tiempo_minimo, color='orange', linestyle='--', linewidth=2, label='Tiempo mínimo teórico')
+                ax2.annotate(
+                    f"Tiempo mínimo teórico: {tiempo_minimo:.2f} h\n({demanda_actual} pacientes / {medicos} médicos)",
+                    xy=(medicos, tiempo_minimo), xytext=(20, -30),
+                    textcoords='offset points', color='orange', fontsize=10, weight='bold',
+                    bbox=dict(boxstyle="round,pad=0.3", facecolor="orange", alpha=0.15),
+                    arrowprops=dict(arrowstyle='->', color='orange', lw=2)
+                )
             
             ax2.set_xlabel('Número de Médicos', fontsize=14)
             ax2.set_ylabel('Tiempo de Espera (horas)', fontsize=14)
@@ -514,151 +537,196 @@ class InterfazAvanzadaSalud:
                           f"• Día: {self.var_dia_semana.get()}")
     
     def actualizar_graficas(self):
-        """Actualizar todas las gráficas con valores actuales"""
-        try:
-            # Limpiar frame
-            for widget in self.frame_graficas.winfo_children():
-                widget.destroy()
-            
-            # OBTENER VALORES ACTUALES
-            hora = self.var_hora.get()
-            medicos = self.var_medicos.get()
-            tipo = self.var_tipo_consulta.get()
-            especialidad = self.var_especialidad.get() if self.var_especialidad.get() != 'ninguna' else None
-            dia = self.var_dia_semana.get()
-            mes = self.var_mes.get()
-            
-            print(f"Actualizando gráficas con: {hora}h, {medicos}m, {tipo}, {especialidad}, {dia}, {mes}")
-            
-            # Crear figura
-            fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(14, 10))
-            fig.suptitle(f'Sistema de Salud - CONFIGURACIÓN ACTUAL: {hora}:00h, {medicos} médicos, {dia}', 
-                        fontsize=16, fontweight='bold')
-            
-            # GRÁFICA 1: Demanda por hora (INTERACTIVA)
-            horas_rango = np.linspace(6, 22, 100)
-            demanda_pura = [max(0, self.sistema.a_cuadratica * h**2 + 
-                               self.sistema.b_cuadratica * h + 
-                               self.sistema.c_cuadratica) for h in horas_rango]
-            demanda_real = [self.sistema.demanda_cuadratica_avanzada(h, dia, mes) for h in horas_rango]
-            
-            ax1.plot(horas_rango, demanda_pura, 'b--', linewidth=2, label='Función Cuadrática Pura', alpha=0.6)
-            ax1.plot(horas_rango, demanda_real, 'r-', linewidth=3, label=f'Modelo Real ({dia}, {mes})')
-            
-            # PUNTO ACTUAL - MUY VISIBLE
-            demanda_actual = self.sistema.demanda_cuadratica_avanzada(hora, dia, mes)
-            ax1.plot(hora, demanda_actual, 'ro', markersize=15, zorder=10)
-            ax1.annotate(f'ACTUAL: {hora}:00h\n{demanda_actual} pacientes', 
-                        (hora, demanda_actual), xytext=(20, 20), 
-                        textcoords='offset points', fontsize=12, weight='bold',
-                        bbox=dict(boxstyle="round,pad=0.5", facecolor="yellow", alpha=0.8),
-                        arrowprops=dict(arrowstyle='->', color='red', lw=2))
-            
-            ax1.set_xlabel('Hora del Día', fontsize=12)
-            ax1.set_ylabel('Pacientes', fontsize=12)
-            ax1.set_title(f'Demanda por Hora - {dia.title()} en {mes.title()}\ny = -0.8x² + 25x - 40', fontsize=12)
-            ax1.legend(fontsize=10)
-            ax1.grid(True, alpha=0.3)
-            ax1.set_xlim(6, 22)
-            
-            # GRÁFICA 2: Tiempo vs Médicos (INTERACTIVA)
-            medicos_rango = np.linspace(1, 200, 200)
-            tiempos = [self.sistema.tiempo_espera_inverso_avanzado(m, demanda_actual, tipo, especialidad) 
-                      for m in medicos_rango]
-            
-            ax2.plot(medicos_rango, tiempos, 'g-', linewidth=3, label=f'Tiempo - {tipo}')
-            
-            # PUNTO ACTUAL - MUY VISIBLE
-            tiempo_actual = self.sistema.tiempo_espera_inverso_avanzado(medicos, demanda_actual, tipo, especialidad)
-            ax2.plot(medicos, tiempo_actual, 'go', markersize=15, zorder=10)
-            ax2.annotate(f'ACTUAL: {medicos} médicos\n{tiempo_actual:.1f} horas', 
-                        (medicos, tiempo_actual), xytext=(20, 20), 
-                        textcoords='offset points', fontsize=12, weight='bold',
-                        bbox=dict(boxstyle="round,pad=0.5", facecolor="lightgreen", alpha=0.8),
-                        arrowprops=dict(arrowstyle='->', color='green', lw=2))
-            
-            ax2.set_xlabel('Número de Médicos', fontsize=12)
-            ax2.set_ylabel('Tiempo de Espera (horas)', fontsize=12)
-            ax2.set_title(f'Tiempo de Espera - {tipo.replace("_", " ").title()}\nT = k/m^n + base', fontsize=12)
-            ax2.legend(fontsize=10)
-            ax2.grid(True, alpha=0.3)
-            ax2.set_ylim(0, min(20, max(tiempos)))
-            
-            # GRÁFICA 3: Distribución consultas (RESALTAR ACTUAL)
-            tipos = list(self.sistema.tipos_consulta.keys())
-            proporciones = [self.sistema.tipos_consulta[t]['proporcion'] for t in tipos]
-            
-            # Resaltar tipo actual
-            colores = ['#ff4444' if t == tipo else '#cccccc' for t in tipos]
-            explode = [0.2 if t == tipo else 0 for t in tipos]
-            
-            wedges, texts, autotexts = ax3.pie(proporciones, labels=tipos, autopct='%1.1f%%', 
-                                              colors=colores, explode=explode)
-            ax3.set_title(f'Distribución por Tipo\n*** {tipo.replace("_", " ").title()} SELECCIONADO ***', fontsize=12)
-            
-            # GRÁFICA 4: Especialidad actual o resumen
-            if especialidad:
-                esp_data = self.sistema.especialidades_criticas[especialidad]
-                categorias = ['Disponibles', 'Necesarios', 'Déficit']
-                valores = [esp_data['disponibles'], esp_data['necesarios'], 
-                          esp_data['necesarios'] - esp_data['disponibles']]
-                colores_esp = ['#dc2626', '#16a34a', '#f97316']
-                
-                bars = ax4.bar(categorias, valores, color=colores_esp, alpha=0.8)
-                ax4.set_ylabel('Número de Médicos', fontsize=12)
-                ax4.set_title(f'ESPECIALIDAD: {especialidad.replace("_", " ").title()}\n'
-                             f'Espera actual: {esp_data["tiempo_espera_meses"]} meses', fontsize=12)
-                
-                for bar, val in zip(bars, valores):
-                    ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, 
-                            f'{val}', ha='center', va='bottom', fontsize=12, weight='bold')
-                ax4.grid(True, alpha=0.3, axis='y')
-            else:
-                # Resumen general
-                especialidades = list(self.sistema.especialidades_criticas.keys())
-                deficit_total = [self.sistema.especialidades_criticas[e]['necesarios'] - 
-                               self.sistema.especialidades_criticas[e]['disponibles'] for e in especialidades]
-                
-                bars = ax4.bar(range(len(especialidades)), deficit_total, 
-                              color=['#dc2626' if d > 30 else '#f97316' if d > 15 else '#22c55e' for d in deficit_total])
-                ax4.set_xlabel('Especialidades', fontsize=12)
-                ax4.set_ylabel('Déficit de Médicos', fontsize=12)
-                ax4.set_title('Déficit por Especialidad', fontsize=12)
-                ax4.set_xticks(range(len(especialidades)))
-                ax4.set_xticklabels([e.replace('_', '\n') for e in especialidades], fontsize=8)
-                ax4.grid(True, alpha=0.3, axis='y')
-            
-            plt.tight_layout()
-            
-            # Integrar en tkinter
-            canvas = FigureCanvasTkAgg(fig, self.frame_graficas)
-            canvas.draw()
-            canvas.get_tk_widget().pack(fill='both', expand=True)
-            
-            # Panel de información actualizado
-            info_frame = tk.Frame(self.frame_graficas, bg='#e8f5e8', relief='solid', bd=3)
-            info_frame.pack(fill='x', padx=10, pady=(10, 0))
-            
-            tk.Label(info_frame, text="📊 PARÁMETROS ACTUALES DE LA SIMULACIÓN", font=('Arial', 14, 'bold'),
-                    bg='#e8f5e8', fg='#1a5f1a').pack(pady=8)
-            
-            info_text = f"""
-🕐 Hora: {hora}:00 → Demanda: {demanda_actual} pacientes
-👨‍⚕️ Médicos: {medicos} → Tiempo espera: {tiempo_actual:.1f} horas  
-📋 Tipo: {tipo.replace('_', ' ').title()} • Especialidad: {(especialidad or 'General').replace('_', ' ').title()}
-📅 {dia.title()} de {mes.title()} • Factor día: {self.sistema.factor_dia[dia]:.1f} • Factor mes: {self.sistema.factor_estacional[mes]:.1f}
-⚙️ Eficiencia: {int(self.sistema.eficiencia_sistema_actual*100)}% • Ausentismo: {int(self.sistema.ausentismo_promedio*100)}%
-            """
-            
-            tk.Label(info_frame, text=info_text.strip(), font=('Arial', 11),
-                    bg='#e8f5e8', fg='#1a5f1a', justify='left').pack(pady=8)
-            
-        except Exception as e:
-            print(f"ERROR en actualizar_graficas: {e}")
-            error_label = tk.Label(self.frame_graficas, text=f"ERROR: {e}",
-                                 bg='red', fg='white', font=('Arial', 16, 'bold'))
-            error_label.pack(fill='both', expand=True)
-    
+        """Actualiza todas las pestañas de gráficas"""
+        self.actualizar_grafica_demanda()
+        self.actualizar_grafica_tiempo()
+        self.actualizar_grafica_tipo()
+        self.actualizar_grafica_especialidad()
+
+    def actualizar_grafica_demanda(self):
+        """Gráfica: Demanda por hora"""
+        for widget in self.tab_demanda.winfo_children():
+            widget.destroy()
+        hora = self.var_hora.get()
+        dia = self.var_dia_semana.get()
+        mes = self.var_mes.get()
+        horas_rango = np.linspace(6, 22, 100)
+        demanda_pura = [max(0, self.sistema.a_cuadratica * h**2 + self.sistema.b_cuadratica * h + self.sistema.c_cuadratica) for h in horas_rango]
+        demanda_real = [self.sistema.demanda_cuadratica_avanzada(h, dia, mes) for h in horas_rango]
+        demanda_actual = self.sistema.demanda_cuadratica_avanzada(hora, dia, mes)
+
+        fig, ax = plt.subplots(figsize=(9, 5))
+        ax.plot(horas_rango, demanda_pura, 'b--', linewidth=2, label='Función Cuadrática Pura', alpha=0.5)
+        ax.plot(horas_rango, demanda_real, 'r-', linewidth=3, label=f'Modelo Real ({dia}, {mes})')
+        ax.plot(hora, demanda_actual, 'ro', markersize=10, zorder=10)
+        ax.annotate(f'{demanda_actual} pacientes', (hora, demanda_actual), xytext=(10, 10), 
+                    textcoords='offset points', fontsize=11, weight='bold',
+                    bbox=dict(boxstyle="round,pad=0.4", facecolor="yellow", alpha=0.8),
+                    arrowprops=dict(arrowstyle='->', color='red', lw=2))
+        ax.set_xlabel('Hora del Día', fontsize=12)
+        ax.set_ylabel('Pacientes', fontsize=12)
+        ax.set_title('Demanda por Hora', fontsize=14)
+        ax.legend(fontsize=10)
+        ax.grid(True, alpha=0.3)
+        ax.set_xlim(6, 22)
+        plt.tight_layout()
+
+        canvas = FigureCanvasTkAgg(fig, self.tab_demanda)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
+
+    def actualizar_grafica_tiempo(self):
+        """Gráfica: Tiempo de espera vs médicos (mejorada, profesional y legible)"""
+        for widget in self.tab_tiempo.winfo_children():
+            widget.destroy()
+        hora = self.var_hora.get()
+        medicos = self.var_medicos.get()
+        tipo = self.var_tipo_consulta.get()
+        especialidad = self.var_especialidad.get() if self.var_especialidad.get() != 'ninguna' else None
+        dia = self.var_dia_semana.get()
+        mes = self.var_mes.get()
+        demanda_actual = self.sistema.demanda_cuadratica_avanzada(hora, dia, mes)
+        medicos_rango = np.linspace(1, 200, 200)
+        tiempos = [self.sistema.tiempo_espera_inverso_avanzado(m, demanda_actual, tipo, especialidad) for m in medicos_rango]
+        tiempo_actual = self.sistema.tiempo_espera_inverso_avanzado(medicos, demanda_actual, tipo, especialidad)
+
+        # Tiempo mínimo teórico (todos los médicos trabajando sin pausa)
+        tiempo_minimo = demanda_actual / medicos if medicos > 0 else float('inf')
+
+        # Ajuste de límites para el eje Y
+        valores_y = [*tiempos, tiempo_actual, tiempo_minimo]
+        min_tiempo = min(val for val in valores_y if np.isfinite(val))
+        max_tiempo = max(val for val in valores_y if np.isfinite(val))
+        margen = (max_tiempo - min_tiempo) * 0.18 if max_tiempo > min_tiempo else 2
+        y_min = max(0, min_tiempo - margen)
+        y_max = max_tiempo + margen
+        # Siempre deja espacio para etiquetas
+        if y_max - y_min < 6:
+            y_max = y_min + 6
+
+        fig, ax = plt.subplots(figsize=(11, 6))
+        # Curva principal
+        ax.plot(medicos_rango, tiempos, color='#059669', linewidth=3, label=f'Tiempo - {tipo.replace("_", " ").title()}')
+        # Punto actual
+        ax.scatter([medicos], [tiempo_actual], color='#059669', s=140, edgecolor='black', zorder=10)
+        ax.annotate(f'{tiempo_actual:.1f} h',
+                    (medicos, tiempo_actual),
+                    xytext=(0, 35), textcoords='offset points',
+                    ha='center', va='bottom',
+                    fontsize=13, weight='bold',
+                    bbox=dict(boxstyle="round,pad=0.5", facecolor="#bbf7d0", alpha=0.95),
+                    arrowprops=dict(arrowstyle='->', color='#059669', lw=2))
+
+        # Línea horizontal de tiempo mínimo teórico
+        if np.isfinite(tiempo_minimo):
+            ax.axhline(y=tiempo_minimo, color='#f59e42', linestyle='--', linewidth=2, label='Tiempo mínimo teórico')
+            # Etiqueta a la derecha, fuera de la curva
+            ax.annotate(
+                f"Teórico: {tiempo_minimo:.2f} h\n({demanda_actual} pacientes / {medicos} médicos)",
+                xy=(medicos_rango[-1], tiempo_minimo),
+                xytext=(-10, 30),
+                textcoords='offset points',
+                color='#b45309', fontsize=11, weight='bold',
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="#fde68a", alpha=0.8),
+                ha='right', va='bottom'
+            )
+
+        # Mejoras visuales
+        ax.set_xlabel('Número de Médicos', fontsize=13, fontweight='bold')
+        ax.set_ylabel('Tiempo de Espera (horas)', fontsize=13, fontweight='bold')
+        ax.set_title('⏳ Tiempo de Espera vs Médicos', fontsize=17, fontweight='bold', color='#1e40af', pad=15)
+        ax.legend(fontsize=12, loc='upper right', frameon=True, facecolor='white')
+        ax.grid(True, alpha=0.22)
+        ax.set_ylim(y_min, y_max)
+        ax.set_xlim(0, 205)
+        ax.tick_params(labelsize=12)
+        plt.tight_layout()
+
+        canvas = FigureCanvasTkAgg(fig, self.tab_tiempo)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
+
+    def actualizar_grafica_tipo(self):
+        """Gráfica: Distribución por tipo de consulta (dinámica según hora y médicos)"""
+        for widget in self.tab_tipo.winfo_children():
+            widget.destroy()
+        tipos = list(self.sistema.tipos_consulta.keys())
+        tipo = self.var_tipo_consulta.get()
+        hora = self.var_hora.get()
+        medicos = self.var_medicos.get()
+
+        # Demanda relativa (normalizada 0-1)
+        demanda_max = max([self.sistema.demanda_cuadratica_avanzada(h, self.var_dia_semana.get(), self.var_mes.get()) for h in range(6, 23)])
+        demanda_actual = self.sistema.demanda_cuadratica_avanzada(hora, self.var_dia_semana.get(), self.var_mes.get())
+        demanda_rel = demanda_actual / demanda_max if demanda_max else 0.5
+
+        # Médicos relativo (normalizado 0-1)
+        medicos_rel = min(1.0, medicos / 200)
+
+        # Ajuste dinámico de proporciones
+        prop_emergencia = 0.15 + 0.15 * demanda_rel * (1 - medicos_rel)
+        prop_especialidad = 0.20 + 0.15 * demanda_rel * (1 - medicos_rel)
+        prop_general = 0.30 + 0.20 * (1 - demanda_rel) * medicos_rel
+        prop_seguimiento = 1.0 - (prop_emergencia + prop_especialidad + prop_general)
+        proporciones = [prop_emergencia, prop_especialidad, prop_general, max(0, prop_seguimiento)]
+
+        # Normalizar para evitar errores de redondeo
+        total = sum(proporciones)
+        proporciones = [p / total for p in proporciones]
+
+        colores = ['#ff4444' if t == tipo else '#cccccc' for t in tipos]
+        explode = [0.2 if t == tipo else 0 for t in tipos]
+
+        fig, ax = plt.subplots(figsize=(7, 5))
+        wedges, texts, autotexts = ax.pie(proporciones, labels=[t.replace('_', '\n') for t in tipos], 
+                                      autopct='%1.1f%%', colors=colores, explode=explode,
+                                      textprops={'fontsize': 11})
+        ax.set_title(f'Distribución por Tipo de Consulta\n*** {tipo.replace("_", " ").title()} SELECCIONADO ***', fontsize=13, weight='bold')
+        plt.tight_layout()
+
+        canvas = FigureCanvasTkAgg(fig, self.tab_tipo)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
+
+    def actualizar_grafica_especialidad(self):
+        """Gráfica: Déficit por especialidad"""
+        for widget in self.tab_especialidad.winfo_children():
+            widget.destroy()
+        especialidad = self.var_especialidad.get() if self.var_especialidad.get() != 'ninguna' else None
+        fig, ax = plt.subplots(figsize=(9, 5))
+        if especialidad:
+            esp_data = self.sistema.especialidades_criticas[especialidad]
+            categorias = ['Disponibles', 'Necesarios', 'Déficit']
+            valores = [esp_data['disponibles'], esp_data['necesarios'], esp_data['necesarios'] - esp_data['disponibles']]
+            colores_esp = ['#dc2626', '#16a34a', '#f97316']
+            bars = ax.bar(categorias, valores, color=colores_esp, alpha=0.8, width=0.6)
+            ax.set_ylabel('Número de Médicos', fontsize=12)
+            ax.set_title(f'ESPECIALIDAD: {especialidad.replace("_", " ").title()}\nTiempo de espera: {esp_data["tiempo_espera_meses"]} meses', fontsize=13)
+            for bar, val in zip(bars, valores):
+                ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, f'{val}', ha='center', va='bottom', fontsize=12, weight='bold')
+            ax.grid(True, alpha=0.3, axis='y')
+            ax.tick_params(labelsize=11)
+        else:
+            especialidades = list(self.sistema.especialidades_criticas.keys())
+            deficit_total = [self.sistema.especialidades_criticas[e]['necesarios'] - self.sistema.especialidades_criticas[e]['disponibles'] for e in especialidades]
+            bars = ax.bar(range(len(especialidades)), deficit_total, 
+                          color=['#dc2626' if d > 30 else '#f97316' if d > 15 else '#22c55e' for d in deficit_total],
+                          alpha=0.8)
+            ax.set_xlabel('Especialidades', fontsize=12)
+            ax.set_ylabel('Déficit de Médicos', fontsize=12)
+            ax.set_title('Déficit por Especialidad Médica', fontsize=13)
+            ax.set_xticks(range(len(especialidades)))
+            ax.set_xticklabels([e.replace('_', '\n') for e in especialidades], fontsize=10)
+            ax.grid(True, alpha=0.3, axis='y')
+            ax.tick_params(labelsize=11)
+            for i, val in enumerate(deficit_total):
+                ax.text(i, val + 1, f'{val}', ha='center', va='bottom', fontsize=11, weight='bold')
+        plt.tight_layout()
+
+        canvas = FigureCanvasTkAgg(fig, self.tab_especialidad)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
+
     def ejecutar_simulacion(self):
         """Ejecutar simulación con parámetros actuales"""
         hora = self.var_hora.get()
@@ -738,4 +806,4 @@ def main():
         input("Presione Enter para salir...")
 
 if __name__ == "__main__":
-    main() ## Final del código
+    main()
