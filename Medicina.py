@@ -10,7 +10,6 @@ class SistemaCitasMedicas:
     """
     Sistema de Optimización de Citas Médicas para El Salvador
     Implementa funciones cuadráticas e inversas para optimizar recursos médicos
-    VERSIÓN MEJORADA con datos empíricos reales
     """
     
     def __init__(self):
@@ -310,7 +309,6 @@ class SistemaCitasMedicas:
 class InterfazModerna:
     """
     Interfaz gráfica moderna para el Sistema de Citas Médicas
-    MANTIENE TODA LA FUNCIONALIDAD ORIGINAL, solo mejora los cálculos internos
     """
     
     def __init__(self):
@@ -322,7 +320,7 @@ class InterfazModerna:
     
     def setup_window(self):
         """Configuración inicial de la ventana"""
-        self.root.title("Sistema de Optimización de Citas Médicas - El Salvador (MEJORADO)")
+        self.root.title("Sistema de Optimización de Citas Médicas - El Salvador")
         self.root.geometry("1400x900")
         self.root.configure(bg='#f0f2f5')
         
@@ -419,13 +417,13 @@ class InterfazModerna:
         title_frame.pack(side='left', expand=True, fill='both')
         
         main_title = tk.Label(title_frame, 
-                            text="Sistema de Optimización de Citas Médicas (MEJORADO)",
+                            text="Sistema de Optimización de Citas Médicas",
                             font=('Segoe UI', 20, 'bold'),
                             bg=self.colors['primary'], fg='white')
         main_title.pack(anchor='w', pady=(5, 0))
         
         subtitle = tk.Label(title_frame,
-                          text="El Salvador • Datos Empíricos Reales • Gráficas Cuadráticas e Inversas • Python",
+                          text="El Salvador • Gráficas Cuadráticas e Inversas • Python",
                           font=('Segoe UI', 11),
                           bg=self.colors['primary'], fg='#B8E0FF')
         subtitle.pack(anchor='w')
@@ -438,7 +436,7 @@ class InterfazModerna:
             ("6.5M", "Habitantes"),
             ("4,318", "Médicos"),
             ("40", "Hospitales"),
-            ("35%", "Ausentismo")  # NUEVO
+            ("35%", "Ausentismo")
         ]
         
         for i, (valor, etiqueta) in enumerate(stats):
@@ -455,7 +453,7 @@ class InterfazModerna:
         calc_frame = ttk.Frame(parent, style='Card.TFrame', padding=20)
         calc_frame.pack(fill='x', padx=20, pady=(20, 10))
         
-        ttk.Label(calc_frame, text="🧮 Calculadoras del Sistema (Modelo Mejorado)", 
+        ttk.Label(calc_frame, text="🧮 Calculadoras del Sistema", 
                  style='Title.TLabel').pack(anchor='w', pady=(0, 15))
         
         # Container para las dos calculadoras
@@ -472,14 +470,14 @@ class InterfazModerna:
         demanda_header.pack(fill='x')
         demanda_header.pack_propagate(False)
         
-        tk.Label(demanda_header, text="📊 Función Mejorada - Demanda Real",
+        tk.Label(demanda_header, text="📊 Función de Demanda",
                font=('Segoe UI', 11, 'bold'), bg=self.colors['info'], fg='white').pack(pady=8)
         
         # Contenido de demanda
         demanda_content = tk.Frame(demanda_frame, bg=self.colors['light'])
         demanda_content.pack(fill='both', expand=True, padx=15, pady=15)
         
-        tk.Label(demanda_content, text="Datos empíricos + y = -0.5x² + 20x - 25",
+        tk.Label(demanda_content, text="y = -0.5x² + 20x - 25",
                font=('Segoe UI', 10, 'italic'), bg=self.colors['light'],
                fg=self.colors['text_secondary']).pack(pady=(0, 10))
         
@@ -517,14 +515,14 @@ class InterfazModerna:
         tiempo_header.pack(fill='x')
         tiempo_header.pack_propagate(False)
         
-        tk.Label(tiempo_header, text="⏱️ Función Mejorada - Tiempo Real",
+        tk.Label(tiempo_header, text="⏱️ Función de Tiempo",
                font=('Segoe UI', 11, 'bold'), bg=self.colors['secondary'], fg='white').pack(pady=8)
         
         # Contenido de tiempo
         tiempo_content = tk.Frame(tiempo_frame, bg=self.colors['light'])
         tiempo_content.pack(fill='both', expand=True, padx=15, pady=15)
         
-        tk.Label(tiempo_content, text="Eficiencia + Ausentismo + T = 120/m",
+        tk.Label(tiempo_content, text="T = 120/m",
                font=('Segoe UI', 10, 'italic'), bg=self.colors['light'],
                fg=self.colors['text_secondary']).pack(pady=(0, 10))
         
@@ -562,10 +560,10 @@ class InterfazModerna:
         btn_container.pack()
         
         botones = [
-            ("📈 Generar Gráficas", self.mostrar_graficas, self.colors['success'], "🎯 Visualizar funciones mejoradas"),
-            ("📋 Ver Reporte", self.mostrar_reporte, self.colors['primary'], "📊 Análisis con datos empíricos"),
-            ("💾 Exportar Datos", self.exportar_datos, self.colors['warning'], "📁 Guardar resultados mejorados"),
-            ("🔄 Optimizar", self.optimizar_sistema, self.colors['accent'], "⚡ Optimización realista")
+            ("📈 Generar Gráficas", self.mostrar_graficas, self.colors['success'], "🎯 Visualizar funciones"),
+            ("📋 Ver Reporte", self.mostrar_reporte, self.colors['primary'], "📊 Análisis detallado"),
+            ("💾 Exportar Datos", self.exportar_datos, self.colors['warning'], "📁 Guardar resultados"),
+            ("🔄 Optimizar", self.optimizar_sistema, self.colors['accent'], "⚡ Optimización")
         ]
         
         for i, (texto, comando, color, descripcion) in enumerate(botones):
@@ -591,7 +589,7 @@ class InterfazModerna:
         result_frame = ttk.Frame(parent, style='Card.TFrame', padding=20)
         result_frame.pack(fill='both', expand=True, padx=20, pady=(10, 20))
         
-        ttk.Label(result_frame, text="📊 Panel de Resultados (Modelo Empírico)", 
+        ttk.Label(result_frame, text="📊 Panel de Resultados", 
                  style='Title.TLabel').pack(anchor='w', pady=(0, 15))
         
         # Crear notebook para pestañas
@@ -615,89 +613,89 @@ class InterfazModerna:
         self.crear_tab_graficas()
     
     def crear_dashboard(self):
-        """Crear dashboard con métricas principales MEJORADAS"""
-        # Frame principal del dashboard
+        """Crear dashboard con métricas principales y tabla mejorada"""
         dashboard_main = tk.Frame(self.tab_dashboard, bg=self.colors['card_bg'])
         dashboard_main.pack(fill='both', expand=True, padx=10, pady=10)
-        
-        # Métricas superiores
+
+        # Botón para expandir panel
+        expand_btn = tk.Button(
+            dashboard_main, text="🔍 Expandir Panel de Resultados",
+            bg=self.colors['primary'], fg='white',
+            font=('Segoe UI', 10, 'bold'),
+            relief='flat', cursor='hand2',
+            command=self.mostrar_dashboard_expandido
+        )
+        expand_btn.pack(anchor='ne', pady=(0, 10), padx=10)
+
+        # Métricas superiores (con mejor estilo)
         metrics_frame = tk.Frame(dashboard_main, bg=self.colors['card_bg'])
         metrics_frame.pack(fill='x', pady=(0, 20))
-        
+
         reporte = self.sistema.generar_reporte_optimizacion()
-        
-        # MÉTRICAS MEJORADAS con datos empíricos
         metrics = [
-            ("Tiempo Espera Actual", "3.5 hrs", self.colors['danger'], "⏰"),
-            ("Tiempo Optimizado", f"{reporte['metricas']['tiempo_espera_promedio']} hrs", self.colors['success'], "✅"),
-            ("Mejora Obtenida", f"{reporte['metricas']['mejora_vs_actual']}%", self.colors['primary'], "📈"),
-            ("Viabilidad", "✅" if reporte['metricas']['es_implementable'] else "❌", self.colors['info'], "🎯")
+            ("⏰ Tiempo Espera Actual", "3.5 hrs", self.colors['danger']),
+            ("✅ Tiempo Optimizado", f"{reporte['metricas']['tiempo_espera_promedio']} hrs", self.colors['success']),
+            ("📈 Mejora Obtenida", f"{reporte['metricas']['mejora_vs_actual']}%", self.colors['primary']),
+            ("🎯 Viabilidad", "✅" if reporte['metricas']['es_implementable'] else "❌", self.colors['info'])
         ]
-        
-        for i, (titulo, valor, color, icono) in enumerate(metrics):
-            metric_card = tk.Frame(metrics_frame, bg=color, relief='flat')
-            metric_card.pack(side='left', fill='both', expand=True, padx=5)
-            
-            # Contenido de la métrica
-            content = tk.Frame(metric_card, bg=color)
-            content.pack(fill='both', expand=True, padx=20, pady=15)
-            
-            tk.Label(content, text=icono, font=('Arial', 20),
-                   bg=color, fg='white').pack()
-            
-            tk.Label(content, text=valor, font=('Segoe UI', 18, 'bold'),
-                   bg=color, fg='white').pack()
-            
-            tk.Label(content, text=titulo, font=('Segoe UI', 10),
-                   bg=color, fg='white').pack()
-        
-        # Información del sistema MEJORADA
+        for titulo, valor, color in metrics:
+            card = tk.Frame(metrics_frame, bg=color, relief='flat', bd=0)
+            card.pack(side='left', fill='both', expand=True, padx=8)
+            tk.Label(card, text=valor, font=('Segoe UI', 20, 'bold'), bg=color, fg='white').pack(pady=(10, 0))
+            tk.Label(card, text=titulo, font=('Segoe UI', 11), bg=color, fg='white').pack(pady=(0, 10))
+
+        # Tabla de distribución por hora (Treeview)
+        tabla_frame = tk.Frame(dashboard_main, bg=self.colors['card_bg'])
+        tabla_frame.pack(fill='both', expand=True, pady=10)
+        tk.Label(tabla_frame, text="Distribución Optimizada por Hora", font=('Segoe UI', 13, 'bold'),
+                 bg=self.colors['card_bg'], fg=self.colors['primary']).pack(anchor='w', pady=(0, 5))
+
+        columns = ("Hora", "Demanda", "Médicos", "T.Espera", "Utiliz%", "Factible")
+        tree = ttk.Treeview(tabla_frame, columns=columns, show='headings', height=10)
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, anchor='center', width=100)
+        for d in reporte['distribucion']:
+            factible = "✅" if d['es_factible'] else "❌"
+            tree.insert('', 'end', values=(
+                d['hora_formato'], d['demanda_predicha'], d['medicos_asignados'],
+                d['tiempo_espera'], d['utilizacion_recursos'], factible
+            ))
+        tree.pack(fill='x', padx=10, pady=5)
+
+        # Información del sistema (igual que antes)
         info_frame = tk.Frame(dashboard_main, bg=self.colors['light'], relief='solid', bd=1)
         info_frame.pack(fill='both', expand=True, pady=10)
-        
         info_header = tk.Frame(info_frame, bg=self.colors['dark'], height=40)
         info_header.pack(fill='x')
         info_header.pack_propagate(False)
-        
-        tk.Label(info_header, text="ℹ️ Sistema de Salud Salvadoreño - Modelo Empírico Mejorado",
-               font=('Segoe UI', 12, 'bold'), bg=self.colors['dark'], fg='white').pack(pady=8)
-        
+        tk.Label(info_header, text="ℹ️ Sistema de Salud Salvadoreño",
+                 font=('Segoe UI', 12, 'bold'), bg=self.colors['dark'], fg='white').pack(pady=8)
         info_content = tk.Frame(info_frame, bg=self.colors['light'])
         info_content.pack(fill='both', expand=True, padx=20, pady=20)
-        
-        # INFORMACIÓN MEJORADA con datos reales
         info_text = f"""
-🏥 DATOS DEL SISTEMA ACTUAL (VALIDADOS):
+🏥 DATOS DEL SISTEMA ACTUAL:
 • Población total cubierta: 6.5 millones de habitantes
 • Hospitales públicos: 40 (MINSAL + ISSS)
 • Médicos disponibles: 4,318 profesionales
 • Tiempo de espera promedio: 3.5 horas
-• Ausentismo de pacientes: 35% (factor crítico)
+• Ausentismo de pacientes: 35%
 • Déficit de personal médico: 22%
 • Eficiencia operativa actual: 65%
 
-📊 FUNCIONES MATEMÁTICAS MEJORADAS:
-• Función Híbrida (Demanda): 70% datos empíricos + 30% y = -0.5x² + 20x - 25
-• Función Mejorada (Tiempo): Eficiencia + Ausentismo + T = 120/m
-• Pico real de demanda: {reporte['metricas']['hora_pico']} (NO a las 8 PM como predecía el modelo original)
+📊 FUNCIONES MATEMÁTICAS:
+• Función de Demanda: y = -0.5x² + 20x - 25
+• Función de Tiempo: T = 120/m
+• Pico de demanda: {reporte['metricas']['hora_pico']}
 
-🎯 MEJORAS IMPLEMENTADAS:
-• Corrección del pico de demanda (era incorrecta a las 8 PM)
-• Incorporación del ausentismo del 35%
-• Modelado del déficit de personal del 22%
-• Consideración de la eficiencia real del 65%
-• Análisis de viabilidad con recursos disponibles
-
-📈 VALIDACIÓN EMPÍRICA:
-• Patrón de demanda corregido: {'✅' if reporte['validacion_empirica']['patron_demanda_corregido'] else '❌'}
-• Ausentismo aplicado: {'✅' if reporte['validacion_empirica']['ausentismo_aplicado'] else '❌'}
-• Eficiencia considerada: {'✅' if reporte['validacion_empirica']['eficiencia_considerada'] else '❌'}
-• Déficit personal modelado: {'✅' if reporte['validacion_empirica']['deficit_personal_modelado'] else '❌'}
-        """
-        
+🎯 ESTADO ACTUAL:
+• Horas factibles: {reporte['metricas']['horas_factibles']}/17
+• Utilización promedio: {reporte['metricas']['utilizacion_promedio_recursos']}%
+• Sistema implementable: {'✅' if reporte['metricas']['es_implementable'] else '❌'}
+"""
         tk.Label(info_content, text=info_text, font=('Segoe UI', 10),
-               bg=self.colors['light'], fg=self.colors['text_primary'],
-               justify='left').pack(anchor='w')
+                 bg=self.colors['light'], fg=self.colors['text_primary'],
+                 justify='left').pack(anchor='w')
     
     def crear_tab_reporte(self):
         """Crear pestaña de reporte detallado"""
@@ -730,25 +728,111 @@ class InterfazModerna:
         self.actualizar_reporte()
     
     def crear_tab_graficas(self):
-        """Crear pestaña para gráficas interactivas"""
-        # Placeholder para gráficas
+        """Crear pestaña para gráficas interactivas con controles de usuario"""
         graficas_frame = tk.Frame(self.tab_graficas, bg=self.colors['card_bg'])
         graficas_frame.pack(fill='both', expand=True, padx=20, pady=20)
-        
-        tk.Label(graficas_frame, 
-               text="📊 Gráficas Mejoradas (Original vs Empírico) se mostrarán aquí",
-               font=('Segoe UI', 12),
-               bg=self.colors['card_bg'],
-               fg=self.colors['text_secondary']).pack(expand=True)
-        
-        # Botón para generar gráficas
-        tk.Button(graficas_frame, text="🚀 Generar Gráficas Mejoradas",
-                command=self.mostrar_graficas,
-                bg=self.colors['success'], fg='white',
-                font=('Segoe UI', 12, 'bold'),
-                relief='flat', cursor='hand2',
-                padx=30, pady=10).pack()
-    
+
+        # Botón para expandir gráficas
+        expand_btn = tk.Button(
+            graficas_frame, text="🔍 Expandir Gráficas",
+            bg=self.colors['primary'], fg='white',
+            font=('Segoe UI', 10, 'bold'),
+            relief='flat', cursor='hand2',
+            command=self.mostrar_graficas_expandido
+        )
+        expand_btn.pack(anchor='ne', pady=(0, 10), padx=10)
+
+        # Controles de usuario
+        control_frame = tk.Frame(graficas_frame, bg=self.colors['card_bg'])
+        control_frame.pack(fill='x', pady=(0, 10))
+
+        tk.Label(control_frame, text="Hora (6-22):", bg=self.colors['card_bg']).pack(side='left')
+        self.graf_hora = tk.IntVar(value=8)
+        tk.Spinbox(control_frame, from_=6, to=22, width=5, textvariable=self.graf_hora).pack(side='left', padx=5)
+
+        tk.Label(control_frame, text="Médicos (1-100):", bg=self.colors['card_bg']).pack(side='left', padx=(20,0))
+        self.graf_medicos = tk.IntVar(value=10)
+        tk.Spinbox(control_frame, from_=1, to=100, width=5, textvariable=self.graf_medicos).pack(side='left', padx=5)
+
+        tk.Label(control_frame, text="Ausentismo (%):", bg=self.colors['card_bg']).pack(side='left', padx=(20,0))
+        self.graf_ausentismo = tk.DoubleVar(value=35)
+        tk.Spinbox(control_frame, from_=0, to=100, width=5, textvariable=self.graf_ausentismo).pack(side='left', padx=5)
+
+        # Botón para actualizar
+        tk.Button(control_frame, text="Actualizar Gráficas", bg=self.colors['success'], fg='white',
+                  command=self.actualizar_graficas, font=('Segoe UI', 10, 'bold')).pack(side='left', padx=20)
+
+        # Área para la gráfica
+        self.graf_canvas_frame = tk.Frame(graficas_frame, bg='white')
+        self.graf_canvas_frame.pack(fill='both', expand=True)
+
+        # Inicializa la gráfica
+        self.actualizar_graficas()
+
+    def actualizar_graficas(self):
+        """Actualizar gráficas con los datos del usuario"""
+        # Limpiar canvas anterior si existe
+        for widget in self.graf_canvas_frame.winfo_children():
+            widget.destroy()
+
+        # Actualizar parámetros del sistema
+        self.sistema.ausentismo_pacientes = self.graf_ausentismo.get() / 100.0
+
+        hora = self.graf_hora.get()
+        medicos = self.graf_medicos.get()
+
+        # Crear figura
+        fig, ax = plt.subplots(1, 2, figsize=(10, 4))
+        fig.tight_layout(pad=4.0)
+
+        # Gráfica de demanda
+        horas = np.linspace(6, 22, 100)
+        demanda = [self.sistema.demanda_cuadratica(h) for h in horas]
+        ax[0].plot(horas, demanda, label="Demanda Optimizada")
+        ax[0].axvline(hora, color='red', linestyle='--', label=f"Hora seleccionada: {hora}")
+        # Calcular demanda para la hora seleccionada
+        demanda_hora = self.sistema.demanda_cuadratica(hora)
+        ax[0].scatter([hora], [demanda_hora], color='red', zorder=5)
+        ax[0].annotate(f"{int(demanda_hora)} pacientes", (hora, demanda_hora),
+                   textcoords="offset points", xytext=(0,10), ha='center', color='red', fontsize=9)
+        ax[0].set_title("Demanda por hora")
+        ax[0].set_xlabel("Hora")
+        ax[0].set_ylabel("Pacientes")
+        ax[0].legend()
+        ax[0].grid(True)
+
+        # Gráfica de tiempo de espera
+        medicos_range = range(1, 101)
+        tiempos = [self.sistema.tiempo_espera_inverso(m) for m in medicos_range]
+        ax[1].plot(medicos_range, tiempos, label="Tiempo Optimizado")
+        ax[1].axvline(medicos, color='green', linestyle='--', label=f"Médicos: {medicos}")
+        # Calcular tiempo de espera para el número de médicos seleccionado
+        tiempo_hora = self.sistema.tiempo_espera_inverso(medicos)
+        ax[1].scatter([medicos], [tiempo_hora], color='green', zorder=5)
+        ax[1].annotate(f"{tiempo_hora:.2f} h", (medicos, tiempo_hora),
+                   textcoords="offset points", xytext=(0,10), ha='center', color='green', fontsize=9)
+        ax[1].set_title("Tiempo de espera vs Médicos")
+        ax[1].set_xlabel("Médicos")
+        ax[1].set_ylabel("Horas")
+        ax[1].legend()
+        ax[1].grid(True)
+
+        # Integrar matplotlib en tkinter
+        canvas = FigureCanvasTkAgg(fig, master=self.graf_canvas_frame)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True)
+
+        # Mostrar función matemática usada y valores actuales
+        funcion_frame = tk.Frame(self.graf_canvas_frame, bg='white', relief='solid', bd=1)
+        funcion_frame.pack(fill='x', padx=20, pady=(10, 0))
+        tk.Label(funcion_frame, text="Función Matemática Utilizada", font=('Segoe UI', 12, 'bold'),
+                 bg='white', fg=self.colors['primary']).pack(anchor='w', pady=(5, 0))
+        tk.Label(funcion_frame, text="Demanda: y = -0.5x² + 20x - 25\nTiempo: T = 120/m",
+                 font=('Segoe UI', 11, 'italic'), bg='white', fg=self.colors['text_secondary']).pack(anchor='w')
+        tk.Label(funcion_frame, text=f"Demanda para hora {hora}: {int(demanda_hora)} pacientes\n"
+                                 f"Tiempo de espera para {medicos} médicos: {tiempo_hora:.2f} horas",
+                 font=('Segoe UI', 10), bg='white', fg=self.colors['text_primary'], wraplength=900, justify='left').pack(anchor='w', pady=(0, 5))
+
     def crear_interfaz(self):
         """Crear la interfaz completa"""
         # Header principal
@@ -764,16 +848,12 @@ class InterfazModerna:
         self.crear_area_resultados(self.root)
     
     def calcular_demanda(self):
-        """Calcular demanda con validación mejorada"""
+        """Calcular demanda con validación"""
         try:
             hora = float(self.hora_entry.get())
             if 6 <= hora <= 22:
-                # Ahora usa la función mejorada
                 demanda = max(0, self.sistema.demanda_cuadratica(hora))
-                demanda_real = self.sistema.demanda_realista(hora)
-                
-                # Mostrar ambos resultados
-                resultado_texto = f"{int(demanda)} pac. (mejorado: {int(demanda_real)})"
+                resultado_texto = f"{int(demanda)} pacientes"
                 self.demanda_result.config(text=resultado_texto,
                                          fg=self.colors['info'])
                 
@@ -786,16 +866,12 @@ class InterfazModerna:
             messagebox.showerror("Error", "Por favor ingrese un número válido")
     
     def calcular_tiempo(self):
-        """Calcular tiempo con validación mejorada"""
+        """Calcular tiempo con validación"""
         try:
             medicos = int(self.medicos_entry.get())
             if medicos > 0:
-                # Ahora usa la función mejorada
                 tiempo = self.sistema.tiempo_espera_inverso(medicos)
-                tiempo_real = self.sistema.tiempo_espera_realista(medicos, 50)
-                
-                # Mostrar ambos resultados
-                resultado_texto = f"{tiempo:.2f} h (real: {tiempo_real:.2f})"
+                resultado_texto = f"{tiempo:.2f} horas"
                 self.tiempo_result.config(text=resultado_texto,
                                         fg=self.colors['secondary'])
                 
@@ -808,168 +884,200 @@ class InterfazModerna:
             messagebox.showerror("Error", "Por favor ingrese un número válido")
     
     def mostrar_graficas(self):
-        """Mostrar gráficas MEJORADAS comparando modelo original vs empírico"""
+        """Mostrar gráficas y la función matemática usada"""
+        # Obtener dimensiones de pantalla
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # Calcular tamaño óptimo de ventana (85% de pantalla)
+        window_width = int(screen_width * 0.85)
+        window_height = int(screen_height * 0.85)
+        
         # Crear ventana para gráficas
         graficas_window = tk.Toplevel(self.root)
-        graficas_window.title("Gráficas del Sistema - Original vs Empírico Mejorado")
-        graficas_window.geometry("1400x1000")
+        graficas_window.title("Gráficas del Sistema de Optimización")
+        graficas_window.geometry(f"{window_width}x{window_height}")
         graficas_window.configure(bg='white')
         
-        # Crear figura de matplotlib con más subplots
-        fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2, figsize=(16, 14))
-        fig.suptitle('Sistema de Optimización - COMPARACIÓN: Original vs Empírico Mejorado', 
-                    fontsize=16, fontweight='bold')
+        # Centrar ventana
+        pos_x = (screen_width - window_width) // 2
+        pos_y = (screen_height - window_height) // 2
+        graficas_window.geometry(f"{window_width}x{window_height}+{pos_x}+{pos_y}")
         
-        # Gráfica 1: Comparación de funciones de demanda
+        # Configurar estilo matplotlib
+        plt.style.use('default')
+        
+        # Calcular tamaño de figura basado en ventana
+        fig_width = window_width / 100  # Convertir a pulgadas
+        fig_height = (window_height - 100) / 100  # Menos espacio para botón
+        
+        # Crear figura con distribución 2x3 para mejor espaciado
+        fig, axes = plt.subplots(2, 3, figsize=(fig_width, fig_height))
+        fig.suptitle('Sistema de Optimización de Citas Médicas - El Salvador', 
+                    fontsize=16, fontweight='bold', y=0.95)
+        
+        # Ajustar espaciado entre subplots
+        plt.subplots_adjust(
+            left=0.08,    # Margen izquierdo
+            bottom=0.1,   # Margen inferior
+            right=0.95,   # Margen derecho
+            top=0.88,     # Margen superior
+            wspace=0.35,  # Espaciado horizontal entre gráficas
+            hspace=0.45   # Espaciado vertical entre gráficas
+        )
+        
+        # Datos para las gráficas
         horas = np.linspace(6, 22, 100)
         
-        # Función original
+        # Gráfica 1: Función de Demanda
+        ax1 = axes[0, 0]
         demanda_original = [max(0, self.sistema.a_cuadratica * h**2 + self.sistema.b_cuadratica * h + self.sistema.c_cuadratica) for h in horas]
-        
-        # Función mejorada (datos empíricos)
-        demanda_real = [self.sistema.demanda_realista(h) for h in horas]
-        
-        # Función híbrida actual
         demanda_hibrida = [max(0, self.sistema.demanda_cuadratica(h)) for h in horas]
         
-        ax1.plot(horas, demanda_original, 'r--', linewidth=2, label='Modelo Original (Pico 8PM)', alpha=0.7)
-        ax1.plot(horas, demanda_real, 'g-', linewidth=3, label='Datos Empíricos Reales', marker='o', markersize=3)
-        ax1.plot(horas, demanda_hibrida, 'b-', linewidth=2, label='Modelo Híbrido Mejorado')
-        ax1.set_xlabel('Hora del Día')
-        ax1.set_ylabel('Número de Pacientes')
-        ax1.set_title('CORRECCIÓN: Demanda Original vs Datos Empíricos')
-        ax1.legend()
+        ax1.plot(horas, demanda_original, 'b-', linewidth=2.5, label='Función Cuadratica', alpha=0.8)
+        ax1.plot(horas, demanda_hibrida, 'r-', linewidth=2.5, label='Función Optimizada', alpha=0.8)
+        ax1.set_xlabel('Hora del Día', fontsize=10)
+        ax1.set_ylabel('Pacientes', fontsize=10)
+        ax1.set_title('Función de Demanda\ny = -0.5x² + 20x - 25', fontsize=11, fontweight='bold')
+        ax1.legend(fontsize=9)
         ax1.grid(True, alpha=0.3)
+        ax1.set_xlim(6, 22)
         
-        # Marcar diferencias críticas
-        ax1.axvline(x=16, color='green', linestyle=':', alpha=0.7, label='Pico Real (4PM)')
-        ax1.axvline(x=20, color='red', linestyle=':', alpha=0.7, label='Pico Modelo Original (8PM)')
-        
-        # Gráfica 2: Comparación de tiempos de espera
+        # Gráfica 2: Función de Tiempo de Espera
+        ax2 = axes[0, 1]
         medicos_range = range(1, 101)
-        demanda_fija = 60  # Demanda fija para comparación
-        
         tiempo_original = [self.sistema.k_inversa/m if m > 0 else 12 for m in medicos_range]
-        tiempo_realista = [self.sistema.tiempo_espera_realista(m, demanda_fija) for m in medicos_range]
-        tiempo_hibrido = [self.sistema.tiempo_espera_inverso(m) for m in medicos_range]
+        tiempo_optimizado = [self.sistema.tiempo_espera_inverso(m) for m in medicos_range]
         
-        ax2.plot(medicos_range, tiempo_original, 'r--', linewidth=2, label='T=120/m (Original)', alpha=0.7)
-        ax2.plot(medicos_range, tiempo_realista, 'g-', linewidth=3, label='Modelo Realista (Eficiencia+Déficit)')
-        ax2.plot(medicos_range, tiempo_hibrido, 'b-', linewidth=2, label='Modelo Híbrido Mejorado')
-        ax2.set_xlabel('Número de Médicos')
-        ax2.set_ylabel('Tiempo de Espera (horas)')
-        ax2.set_title('MEJORA: Tiempo de Espera con Factores Reales')
+        ax2.plot(medicos_range, tiempo_original, 'g-', linewidth=2.5, label='T = 120/m', alpha=0.8)
+        ax2.plot(medicos_range, tiempo_optimizado, 'orange', linewidth=2.5, label='Función Optimizada', alpha=0.8)
+        ax2.set_xlabel('Número de Médicos', fontsize=10)
+        ax2.set_ylabel('Tiempo (horas)', fontsize=10)
+        ax2.set_title('Función de Tiempo de Espera\nT = 120/m', fontsize=11, fontweight='bold')
         ax2.set_ylim(0, 10)
-        ax2.legend()
+        ax2.legend(fontsize=9)
         ax2.grid(True, alpha=0.3)
         
-        # Gráfica 3: Impacto del ausentismo
-        horas_completas = list(range(6, 23))
-        demanda_sin_ausentismo = [self.sistema.patrones_demanda_real[h] for h in horas_completas]
-        demanda_con_ausentismo = [int(self.sistema.patrones_demanda_real[h] * (1 - self.sistema.ausentismo_pacientes)) for h in horas_completas]
-        
-        ax3.bar([h-0.2 for h in horas_completas], demanda_sin_ausentismo, 0.4, 
-               label='Sin Ausentismo', color='lightcoral', alpha=0.8)
-        ax3.bar([h+0.2 for h in horas_completas], demanda_con_ausentismo, 0.4, 
-               label='Con Ausentismo (35%)', color='darkred', alpha=0.8)
-        ax3.set_xlabel('Hora del Día')
-        ax3.set_ylabel('Pacientes')
-        ax3.set_title('FACTOR CRÍTICO: Impacto del Ausentismo del 35%')
-        ax3.legend()
-        ax3.grid(True, alpha=0.3)
-        
-        # Gráfica 4: Distribución optimizada mejorada
+        # Gráfica 3: Distribución por Horas
+        ax3 = axes[0, 2]
         distribucion = self.sistema.optimizar_distribucion_diaria()
         horas_dist = [d['hora'] for d in distribucion]
         demanda_dist = [d['demanda_predicha'] for d in distribucion]
+        
+        bars = ax3.bar(horas_dist, demanda_dist, color='skyblue', alpha=0.7, edgecolor='navy', linewidth=0.8)
+        ax3.set_xlabel('Hora del Día', fontsize=10)
+        ax3.set_ylabel('Pacientes', fontsize=10)
+        ax3.set_title('Distribución de Demanda\npor Hora', fontsize=11, fontweight='bold')
+        ax3.grid(True, alpha=0.3, axis='y')
+        ax3.set_xticks(range(6, 23, 2))
+        
+        # Resaltar hora pico
+        max_demand_idx = demanda_dist.index(max(demanda_dist))
+        bars[max_demand_idx].set_color('red')
+        bars[max_demand_idx].set_alpha(0.8)
+        
+        # Gráfica 4: Médicos Asignados vs Demanda
+        ax4 = axes[1, 0]
         medicos_dist = [d['medicos_asignados'] for d in distribucion]
-        utilizacion_dist = [d['utilizacion_recursos'] for d in distribucion]
         
         ax4_twin = ax4.twinx()
-        bars1 = ax4.bar([h-0.2 for h in horas_dist], demanda_dist, 0.4, 
-                       label='Demanda', color='skyblue', alpha=0.8)
-        bars2 = ax4_twin.bar([h+0.2 for h in horas_dist], utilizacion_dist, 0.4, 
-                            label='Utilización %', color='orange', alpha=0.8)
+        line1 = ax4.plot(horas_dist, demanda_dist, 'b-o', linewidth=2, markersize=4, label='Demanda', alpha=0.8)
+        line2 = ax4_twin.plot(horas_dist, medicos_dist, 'r-s', linewidth=2, markersize=4, label='Médicos', alpha=0.8)
         
-        ax4.set_xlabel('Hora del Día')
-        ax4.set_ylabel('Pacientes', color='blue')
-        ax4_twin.set_ylabel('Utilización de Recursos (%)', color='orange')
-        ax4.set_title('Distribución Optimizada con Análisis de Viabilidad')
+        ax4.set_xlabel('Hora del Día', fontsize=10)
+        ax4.set_ylabel('Pacientes', color='blue', fontsize=10)
+        ax4_twin.set_ylabel('Médicos', color='red', fontsize=10)
+        ax4.set_title('Optimización:\nDemanda vs Médicos', fontsize=11, fontweight='bold')
+        
+        # Combinar leyendas
+        lines = line1 + line2
+        labels = [l.get_label() for l in lines]
+        ax4.legend(lines, labels, loc='upper left', fontsize=9)
         ax4.grid(True, alpha=0.3)
         
-        # Marcar horas críticas (>90% utilización)
-        for i, (h, u) in enumerate(zip(horas_dist, utilizacion_dist)):
-            if u > 90:
-                ax4.axvline(x=h, color='red', alpha=0.3)
+        # Gráfica 5: Tiempo de Espera por Hora
+        ax5 = axes[1, 1]
+        tiempo_dist = [d['tiempo_espera'] for d in distribucion]
         
-        # Gráfica 5: Comparación de métricas
-        reporte = self.sistema.generar_reporte_optimizacion()
-        categorias = ['Tiempo\nEspera (h)', 'Utilización\nRecursos (%)', 'Viabilidad\n(0-1)', 'Precisión\nModelo (0-1)']
+        colors = ['green' if t <= 2 else 'orange' if t <= 4 else 'red' for t in tiempo_dist]
+        bars_tiempo = ax5.bar(horas_dist, tiempo_dist, color=colors, alpha=0.7, edgecolor='black', linewidth=0.5)
         
-        # Simular valores del modelo original para comparación
-        actual = [3.5, 75, 0.3, 0.4]  # Modelo original menos preciso
-        mejorado = [
-            reporte['metricas']['tiempo_espera_promedio'],
-            reporte['metricas']['utilizacion_promedio_recursos'],
-            1.0 if reporte['metricas']['es_implementable'] else 0.0,
-            0.85  # Mayor precisión con datos empíricos
-        ]
+        ax5.set_xlabel('Hora del Día', fontsize=10)
+        ax5.set_ylabel('Tiempo (horas)', fontsize=10)
+        ax5.set_title('Tiempo de Espera\npor Hora', fontsize=11, fontweight='bold')
+        ax5.axhline(y=2, color='green', linestyle='--', alpha=0.7, label='Objetivo (2h)')
+        ax5.legend(fontsize=9)
+        ax5.grid(True, alpha=0.3, axis='y')
+        ax5.set_xticks(range(6, 23, 2))
         
-        x = np.arange(len(categorias))
-        width = 0.35
+        # Gráfica 6: Utilización de Recursos
+        ax6 = axes[1, 2]
+        utilizacion_dist = [d['utilizacion_recursos'] for d in distribucion]
         
-        bars1 = ax5.bar(x - width/2, actual, width, label='Modelo Original', 
-                       color='#ff6b6b', alpha=0.8)
-        bars2 = ax5.bar(x + width/2, mejorado, width, label='Modelo Empírico Mejorado', 
-                       color='#4ecdc4', alpha=0.8)
+        colors_util = ['green' if u <= 70 else 'orange' if u <= 90 else 'red' for u in utilizacion_dist]
+        bars_util = ax6.bar(horas_dist, utilizacion_dist, color=colors_util, alpha=0.7, edgecolor='black', linewidth=0.5)
         
-        ax5.set_ylabel('Valores Normalizados')
-        ax5.set_title('COMPARACIÓN GENERAL: Original vs Mejorado')
-        ax5.set_xticks(x)
-        ax5.set_xticklabels(categorias)
-        ax5.legend()
-        ax5.grid(True, alpha=0.3)
+        ax6.set_xlabel('Hora del Día', fontsize=10)
+        ax6.set_ylabel('Utilización (%)', fontsize=10)
+        ax6.set_title('Utilización de Recursos\npor Hora', fontsize=11, fontweight='bold')
+        ax6.axhline(y=90, color='red', linestyle='--', alpha=0.7, label='Límite crítico')
+        ax6.legend(fontsize=9)
+        ax6.grid(True, alpha=0.3, axis='y')
+        ax6.set_xticks(range(6, 23, 2))
+        ax6.set_ylim(0, 110)
         
-        # Añadir valores en las barras
-        for bars in [bars1, bars2]:
-            for bar in bars:
-                height = bar.get_height()
-                ax5.text(bar.get_x() + bar.get_width()/2., height + height*0.01,
-                        f'{height:.2f}', ha='center', va='bottom', fontsize=8)
-        
-        # Gráfica 6: Análisis de error del modelo original
-        error_hora_pico = abs(reporte['metricas']['hora_pico_real_vs_modelo']['diferencia_horas'])
-        
-        # Crear gráfico de barras de errores
-        tipos_error = ['Pico de\nDemanda', 'Ausentismo\nIgnorado', 'Eficiencia\nNo Considerada', 'Déficit Personal\nOmitido']
-        magnitud_error = [error_hora_pico, 35, 35, 22]  # Porcentajes de error
-        colores_error = ['red', 'orange', 'yellow', 'lightcoral']
-        
-        bars_error = ax6.bar(tipos_error, magnitud_error, color=colores_error, alpha=0.8)
-        ax6.set_ylabel('Magnitud del Error (%)')
-        ax6.set_title('ERRORES CORREGIDOS en el Modelo Original')
-        ax6.grid(True, alpha=0.3)
-        
-        # Añadir valores en las barras de error
-        for bar, valor in zip(bars_error, magnitud_error):
-            height = bar.get_height()
-            ax6.text(bar.get_x() + bar.get_width()/2., height + height*0.01,
-                    f'{valor}%', ha='center', va='bottom', fontweight='bold')
-        
-        plt.tight_layout()
+        # Crear frame para canvas con scroll
+        canvas_frame = tk.Frame(graficas_window, bg='white')
+        canvas_frame.pack(fill='both', expand=True, padx=10, pady=10)
         
         # Integrar matplotlib en tkinter
-        canvas = FigureCanvasTkAgg(fig, graficas_window)
+        canvas = FigureCanvasTkAgg(fig, canvas_frame)
         canvas.draw()
-        canvas.get_tk_widget().pack(fill='both', expand=True, padx=10, pady=10)
+        canvas_widget = canvas.get_tk_widget()
+        canvas_widget.pack(fill='both', expand=True)
         
-        # Botón para cerrar
-        close_btn = tk.Button(graficas_window, text="Cerrar Gráficas",
+        # Frame para botones
+        btn_frame = tk.Frame(graficas_window, bg='white', height=50)
+        btn_frame.pack(fill='x', padx=10, pady=(0, 10))
+        btn_frame.pack_propagate(False)
+        
+        # Botones de control
+        btn_container = tk.Frame(btn_frame, bg='white')
+        btn_container.pack(expand=True)
+        
+        close_btn = tk.Button(btn_container, text="Cerrar",
                             command=graficas_window.destroy,
                             bg=self.colors['danger'], fg='white',
                             font=('Segoe UI', 10, 'bold'),
-                            relief='flat', cursor='hand2')
-        close_btn.pack(pady=10)
+                            relief='flat', cursor='hand2',
+                            padx=20, pady=8)
+        close_btn.pack(side='left', padx=5)
+        
+        # Botón para guardar imagen
+        def guardar_imagen():
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = f"graficas_sistema_salud_{timestamp}.png"
+            fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
+            messagebox.showinfo("Guardado", f"Gráficas guardadas como:\n{filename}")
+        
+        save_btn = tk.Button(btn_container, text="💾 Guardar Imagen",
+                           command=guardar_imagen,
+                           bg=self.colors['success'], fg='white',
+                           font=('Segoe UI', 10, 'bold'),
+                           relief='flat', cursor='hand2',
+                           padx=20, pady=8)
+        save_btn.pack(side='left', padx=5)
+        
+        # Hacer la ventana responsive
+        def on_resize(event):
+            if event.widget == graficas_window:
+                # Recalcular tamaño de figura si es necesario
+                new_width = graficas_window.winfo_width()
+                new_height = graficas_window.winfo_height()
+                if new_width > 800 and new_height > 600:  # Tamaño mínimo
+                    canvas.draw()
+        
+        graficas_window.bind('<Configure>', on_resize)
     
     def mostrar_reporte(self):
         """Mostrar reporte en la pestaña correspondiente"""
@@ -977,49 +1085,35 @@ class InterfazModerna:
         self.actualizar_reporte()
     
     def actualizar_reporte(self):
-        """Actualizar el contenido del reporte MEJORADO"""
+        """Actualizar el contenido del reporte"""
         self.text_reporte.delete(1.0, tk.END)
         reporte = self.sistema.generar_reporte_optimizacion()
         
         texto_reporte = f"""
 {'='*80}
      REPORTE DE OPTIMIZACIÓN DEL SISTEMA DE SALUD SALVADOREÑO
-                           MODELO EMPÍRICO MEJORADO
 {'='*80}
 
-📊 MÉTRICAS GENERALES DEL SISTEMA MEJORADO:
+📊 MÉTRICAS GENERALES DEL SISTEMA:
 {'─'*50}
 • Total de pacientes diarios proyectados: {reporte['metricas']['total_pacientes_diarios']:,} pacientes
 • Tiempo de espera promedio optimizado: {reporte['metricas']['tiempo_espera_promedio']} horas
 • Mejora respecto al sistema actual: {reporte['metricas']['mejora_vs_actual']}%
-• Hora pico de máxima demanda: {reporte['metricas']['hora_pico']} (CORREGIDA)
+• Hora pico de máxima demanda: {reporte['metricas']['hora_pico']}
 • Demanda máxima registrada: {reporte['metricas']['demanda_maxima']} pacientes
 • Utilización promedio de recursos: {reporte['metricas']['utilizacion_promedio_recursos']}%
 • Horas factibles de operación: {reporte['metricas']['horas_factibles']}/17
 • Sistema implementable: {'✅ SÍ' if reporte['metricas']['es_implementable'] else '❌ NO'}
 
-🔍 CORRECCIONES APLICADAS AL MODELO ORIGINAL:
-{'─'*50}
-• PICO DE DEMANDA CORREGIDO:
-  - Modelo original predecía: {reporte['metricas']['hora_pico_real_vs_modelo']['modelo_original']}:00 (8 PM)
-  - Datos empíricos muestran: {reporte['metricas']['hora_pico_real_vs_modelo']['real']}:00
-  - Error corregido: {reporte['metricas']['hora_pico_real_vs_modelo']['diferencia_horas']} horas de diferencia
-
-• FACTORES CRÍTICOS INCORPORADOS:
-  - Ausentismo de pacientes: {self.sistema.ausentismo_pacientes*100:.0f}%
-  - Déficit de personal médico: {self.sistema.deficit_personal*100:.0f}%
-  - Eficiencia operativa real: {self.sistema.eficiencia_actual*100:.0f}%
-  - Cobertura efectiva vs formal: {reporte['metricas']['cobertura_con_ausentismo']:.0f}% vs 80%
-
-🏥 INFORMACIÓN DEL SISTEMA ACTUAL (VALIDADA):
+🏥 INFORMACIÓN DEL SISTEMA ACTUAL:
 {'─'*50}
 • Población total cubierta: {self.sistema.poblacion_total:,} habitantes
 • Hospitales públicos disponibles: {self.sistema.hospitales_publicos}
 • Médicos en el sistema: {self.sistema.medicos_disponibles:,}
 • Tiempo de espera actual: {self.sistema.tiempo_espera_actual} horas
-• Capacidad real por médico: {self.sistema.capacidad_medico_hora} pacientes/hora
+• Capacidad por médico: {self.sistema.capacidad_medico_hora} pacientes/hora
 
-📈 DISTRIBUCIÓN OPTIMIZADA POR HORA (MODELO EMPÍRICO):
+📈 DISTRIBUCIÓN OPTIMIZADA POR HORA:
 {'─'*80}
 {'Hora':<8} {'Demanda':<10} {'Médicos':<10} {'T.Espera':<10} {'Utiliz%':<10} {'Factible':<10}
 {'─'*80}
@@ -1032,56 +1126,36 @@ class InterfazModerna:
         texto_reporte += f"""
 {'─'*80}
 
-🧮 FUNCIONES MATEMÁTICAS MEJORADAS:
+🧮 FUNCIONES MATEMÁTICAS:
 {'─'*50}
-📊 Función Híbrida de Demanda:
-   • Combinación: 70% datos empíricos + 30% y = -0.5x² + 20x - 25
-   • Patrones reales: Picos matutinos (9 AM) y vespertinos (4 PM)
-   • Incorpora ausentismo del 35%
-   • Ajustes por día de semana y festivos
+📊 Función de Demanda:
+   • Ecuación: y = -0.5x² + 20x - 25
+   • Tipo: Función cuadrática
+   • Dominio: [6, 22] (horas del día)
+   • Pico máximo: {reporte['metricas']['hora_pico']}
 
-⏱️ Función Mejorada de Tiempo de Espera:
-   • Base: T = 120/m (modelo original)
-   • Factores añadidos: Eficiencia (65%), Déficit personal (22%)
-   • Modelo de colas M/M/c para sistemas saturados
-   • Considera tipos de consulta y complejidad
+⏱️ Función de Tiempo de Espera:
+   • Ecuación: T = 120/m
+   • Tipo: Función inversa
+   • Variables: m = número de médicos
+   • Tiempo objetivo: 2 horas
 
-🎯 ANÁLISIS DE VIABILIDAD Y IMPLEMENTACIÓN:
+🎯 ANÁLISIS DE VIABILIDAD:
 {'─'*50}
-• Sistema implementable con recursos actuales: {'✅ SÍ' if reporte['metricas']['es_implementable'] else '❌ NO'}
+• Sistema implementable: {'✅ SÍ' if reporte['metricas']['es_implementable'] else '❌ NO'}
 • Déficit máximo de médicos: {reporte['metricas']['deficit_maximo_medicos']} médicos
 • Horas críticas (>90% utilización): {reporte['metricas']['horas_criticas']}
-• Eficiencia vs modelo original: {reporte['metricas']['eficiencia_vs_modelo_original']}%
 
-✅ VALIDACIÓN EMPÍRICA APLICADA:
+💡 RECOMENDACIONES:
 {'─'*50}
-• Patrón de demanda corregido: {'✅' if reporte['validacion_empirica']['patron_demanda_corregido'] else '❌'}
-• Ausentismo del 35% aplicado: {'✅' if reporte['validacion_empirica']['ausentismo_aplicado'] else '❌'}
-• Eficiencia del 65% considerada: {'✅' if reporte['validacion_empirica']['eficiencia_considerada'] else '❌'}
-• Déficit del 22% modelado: {'✅' if reporte['validacion_empirica']['deficit_personal_modelado'] else '❌'}
-
-💡 RECOMENDACIONES PARA IMPLEMENTACIÓN (BASADAS EN DATOS REALES):
-{'─'*50}
-1. URGENTE: Corregir expectativas - el pico real es a las 4 PM, no 8 PM
-2. Implementar sistema de recordatorios para reducir ausentismo del 35%
-3. Concentrar 70% del personal entre 14:00-18:00 (pico real)
-4. Contratar {max(0, reporte['metricas']['deficit_maximo_medicos'])} médicos adicionales para viabilidad completa
-5. Mejorar eficiencia operativa del 65% actual hacia 80%
-6. Establecer turnos diferenciados por tipo de consulta
-7. Implementar telemedicina para consultas de seguimiento (reducir demanda física)
-
-📊 COMPARACIÓN: MODELO ORIGINAL vs EMPÍRICO MEJORADO:
-{'─'*50}
-• Precisión en predicción de pico: ERROR de 4 horas corregido
-• Consideración de ausentismo: 0% → 35%
-• Modelado de eficiencia: 100% → 65% (realista)
-• Análisis de viabilidad: No disponible → Completo
-• Factores de riesgo identificados: 0 → 4 críticos
+1. Concentrar personal entre 14:00-18:00 (horas pico)
+2. Implementar turnos diferenciados por demanda
+3. Sistema de citas para optimizar distribución
+4. Monitoreo continuo de utilización de recursos
 
 {'='*80}
 Reporte generado el: {datetime.now().strftime('%d/%m/%Y a las %H:%M:%S')}
-Sistema MEJORADO con datos empíricos - Python + Matemáticas Aplicadas
-Correcciones críticas aplicadas al modelo original
+Sistema de Optimización - Python + Matemáticas Aplicadas
 {'='*80}
 """
         
@@ -1093,24 +1167,23 @@ Correcciones críticas aplicadas al modelo original
                                    font=('Segoe UI', 12, 'bold'))
     
     def exportar_datos(self):
-        """Exportar datos con diálogo de confirmación mejorado"""
+        """Exportar datos con diálogo de confirmación"""
         try:
             distribucion = self.sistema.optimizar_distribucion_diaria()
-            reporte = self.sistema.generar_reporte_optimizacion()
             
-            # Crear DataFrame con datos completos MEJORADOS
+            # Crear DataFrame con datos completos
             df = pd.DataFrame(distribucion)
             
-            # Añadir metadatos del modelo mejorado
+            # Añadir metadatos
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            filename = f"optimizacion_salud_salvador_MEJORADO_{timestamp}.csv"
+            filename = f"optimizacion_salud_salvador_{timestamp}.csv"
             
             # Guardar archivo
             df.to_csv(filename, index=False, encoding='utf-8')
             
             # Crear ventana de confirmación personalizada
             success_window = tk.Toplevel(self.root)
-            success_window.title("Exportación Exitosa - Modelo Mejorado")
+            success_window.title("Exportación Exitosa")
             success_window.geometry("500x300")
             success_window.configure(bg='white')
             success_window.resizable(False, False)
@@ -1123,7 +1196,7 @@ Correcciones críticas aplicadas al modelo original
             tk.Label(success_window, text="✅", font=('Arial', 40), 
                    bg='white', fg=self.colors['success']).pack(pady=20)
             
-            tk.Label(success_window, text="Datos del Modelo Mejorado Exportados",
+            tk.Label(success_window, text="Datos Exportados Exitosamente",
                    font=('Segoe UI', 14, 'bold'), bg='white',
                    fg=self.colors['text_primary']).pack()
             
@@ -1132,7 +1205,7 @@ Correcciones críticas aplicadas al modelo original
                    fg=self.colors['text_secondary']).pack(pady=10)
             
             tk.Label(success_window, 
-                   text=f"Registros exportados: {len(distribucion)}\nMétricas incluidas: Todas + Validación empírica\nFactores reales: Ausentismo, Eficiencia, Déficit",
+                   text=f"Registros exportados: {len(distribucion)}\nFormato: CSV con todas las métricas",
                    font=('Segoe UI', 9), bg='white',
                    fg=self.colors['text_secondary']).pack()
             
@@ -1148,10 +1221,10 @@ Correcciones críticas aplicadas al modelo original
                                f"No se pudo exportar el archivo:\n{str(e)}")
     
     def optimizar_sistema(self):
-        """Ejecutar optimización completa del sistema MEJORADO"""
+        """Ejecutar optimización completa del sistema"""
         # Ventana de progreso
         progress_window = tk.Toplevel(self.root)
-        progress_window.title("Optimizando Sistema (Modelo Empírico)...")
+        progress_window.title("Optimizando Sistema...")
         progress_window.geometry("450x220")
         progress_window.configure(bg='white')
         progress_window.resizable(False, False)
@@ -1162,7 +1235,7 @@ Correcciones críticas aplicadas al modelo original
         tk.Label(progress_window, text="🔄", font=('Arial', 30),
                bg='white', fg=self.colors['primary']).pack(pady=20)
         
-        tk.Label(progress_window, text="Ejecutando Optimización con Datos Empíricos",
+        tk.Label(progress_window, text="Ejecutando Optimización del Sistema",
                font=('Segoe UI', 12, 'bold'), bg='white').pack()
         
         status_label = tk.Label(progress_window, text="Iniciando...",
@@ -1174,23 +1247,22 @@ Correcciones críticas aplicadas al modelo original
         progress = ttk.Progressbar(progress_window, length=350, mode='determinate')
         progress.pack(pady=10)
         
-        # Simular proceso de optimización MEJORADO
+        # Simular proceso de optimización
         pasos = [
-            "Validando datos empíricos del sistema...",
-            "Corrigiendo patrones de demanda (pico real vs modelo)...",
-            "Aplicando factor de ausentismo del 35%...",
-            "Calculando eficiencia real del 65%...",
-            "Modelando déficit de personal del 22%...",
-            "Generando distribución optimizada...",
-            "Evaluando viabilidad con recursos disponibles...",
-            "Optimización empírica completada!"
+            "Validando datos del sistema...",
+            "Calculando patrones de demanda...",
+            "Aplicando funciones matemáticas...",
+            "Optimizando distribución de recursos...",
+            "Evaluando viabilidad...",
+            "Generando reporte final...",
+            "Optimización completada!"
         ]
         
         def actualizar_progreso(paso_actual=0):
             if paso_actual < len(pasos):
                 status_label.config(text=pasos[paso_actual])
                 progress['value'] = (paso_actual + 1) * (100 / len(pasos))
-                progress_window.after(1000, lambda: actualizar_progreso(paso_actual + 1))
+                progress_window.after(800, lambda: actualizar_progreso(paso_actual + 1))
             else:
                 progress_window.destroy()
                 self.mostrar_resultado_optimizacion()
@@ -1198,7 +1270,7 @@ Correcciones críticas aplicadas al modelo original
         actualizar_progreso()
     
     def mostrar_resultado_optimizacion(self):
-        """Mostrar resultado de la optimización MEJORADA"""
+        """Mostrar resultado de la optimización"""
         # Actualizar dashboard
         self.crear_dashboard()
         
@@ -1208,127 +1280,187 @@ Correcciones críticas aplicadas al modelo original
         # Obtener datos para mensaje personalizado
         reporte = self.sistema.generar_reporte_optimizacion()
         
-        # Mostrar mensaje de éxito MEJORADO
-        mensaje_mejoras = f"""✅ El sistema ha sido optimizado con datos empíricos reales!
-
-🔧 CORRECCIONES APLICADAS:
-• Pico de demanda corregido de 8 PM a {reporte['metricas']['hora_pico']}
-• Ausentismo del 35% incorporado (factor crítico ignorado antes)
-• Eficiencia real del 65% considerada
-• Déficit de personal del 22% modelado
+        # Mostrar mensaje de éxito
+        mensaje_optimizacion = f"""✅ El sistema ha sido optimizado exitosamente!
 
 📊 RESULTADOS:
 • Tiempo de espera: {reporte['metricas']['tiempo_espera_promedio']} horas
 • Mejora del {reporte['metricas']['mejora_vs_actual']}% vs sistema actual
 • Viabilidad: {'✅ Implementable' if reporte['metricas']['es_implementable'] else '❌ Requiere más recursos'}
+• Hora pico optimizada: {reporte['metricas']['hora_pico']}
 
 📈 Revise el dashboard y reporte detallado para análisis completo."""
         
-        messagebox.showinfo("Optimización Empírica Completada", mensaje_mejoras)
+        messagebox.showinfo("Optimización Completada", mensaje_optimizacion)
     
-    def ejecutar(self):
-        """Ejecutar la aplicación"""
-        # Configurar eventos de teclado
-        self.root.bind('<Return>', lambda e: self.calcular_demanda() if self.hora_entry.get() else self.calcular_tiempo())
-        self.root.bind('<F1>', lambda e: self.mostrar_ayuda())
-        
-        # Mostrar mensaje de bienvenida MEJORADO
-        self.root.after(500, self.mostrar_bienvenida)
-        
-        # Iniciar loop principal
-        self.root.mainloop()
-    
-    def mostrar_bienvenida(self):
-        """Mostrar mensaje de bienvenida MEJORADO"""
-        messagebox.showinfo(
-            "¡Sistema de Optimización Médica MEJORADO!",
-            "🏥 Sistema de Optimización de Citas Médicas\n" +
-            "📍 El Salvador - VERSIÓN EMPÍRICA MEJORADA\n\n" +
-            "🔧 CORRECCIONES APLICADAS:\n" +
-            "• Datos empíricos reales de hospitales\n" +
-            "• Pico de demanda corregido (4 PM, no 8 PM)\n" +
-            "• Ausentismo del 35% incorporado\n" +
-            "• Eficiencia real del 65% considerada\n" +
-            "• Análisis de viabilidad incluido\n\n" +
-            "📊 Características mejoradas:\n" +
-            "• Funciones matemáticas híbridas\n" +
-            "• Validación empírica aplicada\n" +
-            "• Reportes con análisis de factibilidad\n\n" +
-            "💡 Explore las gráficas para ver comparaciones Original vs Mejorado"
-        )
-    
-    def mostrar_ayuda(self):
-        """Mostrar ventana de ayuda MEJORADA"""
-        ayuda_window = tk.Toplevel(self.root)
-        ayuda_window.title("Ayuda - Sistema de Optimización MEJORADO")
-        ayuda_window.geometry("700x500")
-        ayuda_window.configure(bg='white')
-        
-        # Contenido de ayuda
-        ayuda_text = tk.Text(ayuda_window, wrap=tk.WORD, font=('Segoe UI', 10),
-                           bg='white', relief='flat', padx=20, pady=20)
-        ayuda_text.pack(fill='both', expand=True)
-        
-        ayuda_content = """
-🆘 AYUDA - SISTEMA DE OPTIMIZACIÓN MEJORADO CON DATOS EMPÍRICOS
+    def mostrar_dashboard_expandido(self):
+        """Muestra el dashboard en una ventana grande y elegante"""
+        reporte = self.sistema.generar_reporte_optimizacion()
 
-🔧 MEJORAS IMPLEMENTADAS:
+        win = tk.Toplevel(self.root)
+        win.title("Panel de Resultados - Expandido")
+        win.geometry("1200x700")
+        win.configure(bg=self.colors['card_bg'])
+        win.transient(self.root)
+        win.grab_set()
 
-✅ CORRECCIONES CRÍTICAS:
-   • Pico de demanda corregido: 16:00 (datos reales) vs 20:00 (modelo original)
-   • Ausentismo del 35% incorporado (factor crítico omitido en versión original)
-   • Eficiencia real del 65% vs 100% teórica
-   • Déficit de personal del 22% modelado
+        # Métricas superiores
+        metrics_frame = tk.Frame(win, bg=self.colors['card_bg'])
+        metrics_frame.pack(fill='x', pady=(20, 20), padx=20)
 
-📚 GUÍA DE USO DEL SISTEMA MEJORADO:
+        metrics = [
+            ("⏰ Tiempo Espera Actual", "3.5 hrs", self.colors['danger']),
+            ("✅ Tiempo Optimizado", f"{reporte['metricas']['tiempo_espera_promedio']} hrs", self.colors['success']),
+            ("📈 Mejora Obtenida", f"{reporte['metricas']['mejora_vs_actual']}%", self.colors['primary']),
+            ("🎯 Viabilidad", "✅" if reporte['metricas']['es_implementable'] else "❌", self.colors['info'])
+        ]
+        for titulo, valor, color in metrics:
+            card = tk.Frame(metrics_frame, bg=color, relief='flat', bd=0)
+            card.pack(side='left', fill='both', expand=True, padx=12)
+            tk.Label(card, text=valor, font=('Segoe UI', 28, 'bold'), bg=color, fg='white').pack(pady=(18, 0))
+            tk.Label(card, text=titulo, font=('Segoe UI', 13), bg=color, fg='white').pack(pady=(0, 18))
 
-1️⃣ CALCULADORAS MEJORADAS:
-   • Función Demanda: Ahora combina datos empíricos + modelo original
-   • Función Tiempo: Incorpora eficiencia real y factores de ausentismo
-   • Resultados muestran: valor híbrido (valor empírico puro)
+        # Tabla de distribución por hora (Treeview con scroll)
+        tabla_frame = tk.Frame(win, bg=self.colors['card_bg'])
+        tabla_frame.pack(fill='both', expand=True, pady=10, padx=20)
+        tk.Label(tabla_frame, text="Distribución Optimizada por Hora", font=('Segoe UI', 15, 'bold'),
+                 bg=self.colors['card_bg'], fg=self.colors['primary']).pack(anchor='w', pady=(0, 8))
 
-2️⃣ GRÁFICAS COMPARATIVAS:
-   • Visualización Original vs Empírico
-   • Corrección del error de pico de demanda
-   • Impacto visual del ausentismo y eficiencia
+        columns = ("Hora", "Demanda", "Médicos", "T.Espera", "Utiliz%", "Factible")
+        tree = ttk.Treeview(tabla_frame, columns=columns, show='headings', height=18)
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, anchor='center', width=120)
+        for d in reporte['distribucion']:
+            factible = "✅" if d['es_factible'] else "❌"
+            tree.insert('', 'end', values=(
+                d['hora_formato'], d['demanda_predicha'], d['medicos_asignados'],
+                d['tiempo_espera'], d['utilizacion_recursos'], factible
+            ))
+        tree.pack(fill='x', padx=10, pady=5)
 
-3️⃣ REPORTES VALIDADOS:
-   • Análisis de viabilidad con recursos disponibles
-   • Métricas de factibilidad por hora
-   • Validación empírica aplicada
+        # Scrollbar para la tabla
+        scrollbar = ttk.Scrollbar(tabla_frame, orient="vertical", command=tree.yview)
+        tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side='right', fill='y')
 
-🧮 FUNCIONES MATEMÁTICAS MEJORADAS:
-   • Demanda Híbrida: 70% empírico + 30% y = -0.5x² + 20x - 25
-   • Tiempo Realista: Eficiencia + Ausentismo + T = 120/m
-   • Considera: Tipos de consulta, días de semana, factores reales
+        # Información del sistema
+        info_frame = tk.Frame(win, bg=self.colors['light'], relief='solid', bd=1)
+        info_frame.pack(fill='x', expand=False, pady=20, padx=20)
+        info_header = tk.Frame(info_frame, bg=self.colors['dark'], height=40)
+        info_header.pack(fill='x')
+        info_header.pack_propagate(False)
+        tk.Label(info_header, text="ℹ️ Sistema de Salud Salvadoreño",
+                 font=('Segoe UI', 13, 'bold'), bg=self.colors['dark'], fg='white').pack(pady=8)
+        info_content = tk.Frame(info_frame, bg=self.colors['light'])
+        info_content.pack(fill='both', expand=True, padx=20, pady=20)
+        info_text = f"""
+🏥 DATOS DEL SISTEMA ACTUAL:
+• Población total cubierta: 6.5 millones de habitantes
+• Hospitales públicos: 40 (MINSAL + ISSS)
+• Médicos disponibles: 4,318 profesionales
+• Tiempo de espera promedio: 3.5 horas
+• Ausentismo de pacientes: 35%
+• Déficit de personal médico: 22%
+• Eficiencia operativa actual: 65%
 
-🎯 INDICADORES DE CALIDAD:
-   • Verde ✅: Sistema factible con recursos actuales
-   • Amarillo ⚠️: Utilización >90%, requiere atención
-   • Rojo ❌: Déficit de recursos, requiere contratación
+📊 FUNCIONES MATEMÁTICAS:
+• Función de Demanda: y = -0.5x² + 20x - 25
+• Función de Tiempo: T = 120/m
+• Pico de demanda: {reporte['metricas']['hora_pico']}
 
-📊 VALIDACIÓN EMPÍRICA:
-   • Patrón de demanda: Basado en estudios hospitalarios reales
-   • Factores críticos: Todos los del PDF incorporados
-   • Análisis de viabilidad: Completo con recursos disponibles
+🎯 ESTADO ACTUAL:
+• Horas factibles: {reporte['metricas']['horas_factibles']}/17
+• Utilización promedio: {reporte['metricas']['utilizacion_promedio_recursos']}%
+• Sistema implementable: {'✅' if reporte['metricas']['es_implementable'] else '❌'}
+"""
+        tk.Label(info_content, text=info_text, font=('Segoe UI', 11),
+                 bg=self.colors['light'], fg=self.colors['text_primary'],
+                 justify='left').pack(anchor='w')
 
-⌨️ FUNCIONALIDADES MEJORADAS:
-   • F1: Esta ayuda mejorada
-   • Enter: Cálculos con comparación empírica
-   • Exportación: Incluye métricas de validación
+        # Botón cerrar
+        tk.Button(win, text="Cerrar", command=win.destroy,
+                  bg=self.colors['danger'], fg='white',
+                  font=('Segoe UI', 11, 'bold'),
+                  relief='flat', cursor='hand2',
+                  padx=20, pady=8).pack(pady=20)
 
-🔬 DIFERENCIAS vs VERSIÓN ORIGINAL:
-   • Precisión: +75% en predicción de demanda
-   • Realismo: Incorpora 4 factores críticos omitidos
-   • Implementabilidad: Análisis de viabilidad completo
-   • Validación: Basado en datos empíricos hospitalarios
+    def mostrar_graficas_expandido(self):
+        """Muestra las gráficas interactivas en una ventana grande"""
+        # Toma los valores actuales de los controles
+        hora = self.graf_hora.get()
+        medicos = self.graf_medicos.get()
+        ausentismo = self.graf_ausentismo.get()
 
-💡 RECOMENDACIÓN: Compare siempre las gráficas Original vs Empírico
-para entender el impacto de las correcciones aplicadas.
-        """
-        
-        ayuda_text.insert(tk.END, ayuda_content)
-        ayuda_text.config(state='disabled')
+        # Aplica el ausentismo al sistema
+        self.sistema.ausentismo_pacientes = ausentismo / 100.0
+
+        # Crear ventana expandida
+        win = tk.Toplevel(self.root)
+        win.title("Gráficas Interactivas - Expandido")
+        win.geometry("1200x700")
+        win.configure(bg='white')
+        win.transient(self.root)
+        win.grab_set()
+
+        # Crear figura grande
+        fig, ax = plt.subplots(1, 2, figsize=(14, 5))
+        fig.tight_layout(pad=4.0)
+
+        # Gráfica de demanda
+        horas = np.linspace(6, 22, 100)
+        demanda = [self.sistema.demanda_cuadratica(h) for h in horas]
+        ax[0].plot(horas, demanda, label="Demanda Optimizada")
+        ax[0].axvline(hora, color='red', linestyle='--', label=f"Hora seleccionada: {hora}")
+        # Calcular demanda para la hora seleccionada
+        demanda_hora = self.sistema.demanda_cuadratica(hora)
+        ax[0].scatter([hora], [demanda_hora], color='red', zorder=5)
+        ax[0].annotate(f"{int(demanda_hora)} pacientes", (hora, demanda_hora),
+                   textcoords="offset points", xytext=(0,10), ha='center', color='red', fontsize=11)
+        ax[0].set_title("Demanda por hora", fontsize=13)
+        ax[0].set_xlabel("Hora")
+        ax[0].set_ylabel("Pacientes")
+        ax[0].legend()
+        ax[0].grid(True)
+
+        # Gráfica de tiempo de espera
+        medicos_range = range(1, 101)
+        tiempos = [self.sistema.tiempo_espera_inverso(m) for m in medicos_range]
+        ax[1].plot(medicos_range, tiempos, label="Tiempo Optimizado")
+        ax[1].axvline(medicos, color='green', linestyle='--', label=f"Médicos: {medicos}")
+        # Calcular tiempo de espera para el número de médicos seleccionado
+        tiempo_hora = self.sistema.tiempo_espera_inverso(medicos)
+        ax[1].scatter([medicos], [tiempo_hora], color='green', zorder=5)
+        ax[1].annotate(f"{tiempo_hora:.2f} h", (medicos, tiempo_hora),
+                   textcoords="offset points", xytext=(0,10), ha='center', color='green', fontsize=11)
+        ax[1].set_title("Tiempo de espera vs Médicos", fontsize=13)
+        ax[1].set_xlabel("Médicos")
+        ax[1].set_ylabel("Horas")
+        ax[1].legend()
+        ax[1].grid(True)
+
+        # Integrar matplotlib en tkinter
+        canvas = FigureCanvasTkAgg(fig, master=win)
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill='both', expand=True, padx=10, pady=10)
+
+        # Mostrar función matemática usada y valores actuales
+        funcion_frame = tk.Frame(win, bg='white', relief='solid', bd=1)
+        funcion_frame.pack(fill='x', padx=20, pady=(10, 0))
+        tk.Label(funcion_frame, text="Función Matemática Utilizada", font=('Segoe UI', 12, 'bold'),
+             bg='white', fg=self.colors['primary']).pack(anchor='w', pady=(5, 0))
+        tk.Label(funcion_frame, text="Demanda: y = -0.5x² + 20x - 25\nTiempo: T = 120/m",
+             font=('Segoe UI', 11, 'italic'), bg='white', fg=self.colors['text_secondary']).pack(anchor='w')
+        tk.Label(funcion_frame, text=f"Demanda para hora {hora}: {int(demanda_hora)} pacientes\n"
+                                 f"Tiempo de espera para {medicos} médicos: {tiempo_hora:.2f} horas",
+             font=('Segoe UI', 10), bg='white', fg=self.colors['text_primary'], wraplength=900, justify='left').pack(anchor='w', pady=(0, 5))
+
+        # Botón cerrar
+        tk.Button(win, text="Cerrar", command=win.destroy,
+              bg=self.colors['danger'], fg='white',
+              font=('Segoe UI', 11, 'bold'),
+              relief='flat', cursor='hand2',
+              padx=20, pady=8).pack(pady=20)
 
 def main():
     """
